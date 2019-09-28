@@ -5,9 +5,9 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/kuceriklukas/ultimate-blog-api/handlers"
 	"github.com/kuceriklukas/ultimate-blog-api/models"
 	"github.com/kuceriklukas/ultimate-blog-api/repositories"
-	"github.com/kuceriklukas/ultimate-blog-api/handlers"
 )
 
 const port = ":8008"
@@ -16,9 +16,9 @@ func prepareTempData() {
 	author1 := *models.NewAuthor("John", "", "Incredibulous")
 	author2 := *models.NewAuthor("Alice", "Starborn", "Unicorn")
 	author3 := *models.NewAuthor("Luk", "A", "Chu")
-	repositories.Authors = append(repositories.Authors, author1) 
-	repositories.Authors = append(repositories.Authors, author2) 
-	repositories.Authors = append(repositories.Authors, author3) 
+	repositories.Authors = append(repositories.Authors, author1)
+	repositories.Authors = append(repositories.Authors, author2)
+	repositories.Authors = append(repositories.Authors, author3)
 
 	repositories.CurrentAuthor = author3
 
@@ -37,6 +37,7 @@ func main() {
 	router.HandleFunc("/posts", handlers.GetPosts).Methods("GET")
 	router.HandleFunc("/authors", handlers.GetAuthors).Methods("GET")
 	router.HandleFunc("/create-post", handlers.CreatePost).Methods("POST")
+	router.HandleFunc("/post", handlers.GetPost).Methods("GET")
 
 	log.Printf("Listening on %s \n", port)
 
